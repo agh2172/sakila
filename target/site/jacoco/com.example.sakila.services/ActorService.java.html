@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ActorService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">sakila</a> &gt; <a href="index.source.html" class="el_package">com.example.sakila.services</a> &gt; <span class="el_source">ActorService.java</span></div><h1>ActorService.java</h1><pre class="source lang-java linenums">package com.example.sakila.services;
+
+import com.example.sakila.entities.Actor;
+import com.example.sakila.entities.PartialFilm;
+import com.example.sakila.input.ActorInput;
+import com.example.sakila.input.ActorUpdate;
+import com.example.sakila.repositories.ActorRespository;
+import com.example.sakila.repositories.FilmRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.client.ResourceAccessException;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Service
+<span class="nc" id="L18">public class ActorService {</span>
+
+    @Autowired
+    ActorRespository actorRespository;
+    @Autowired
+    FilmRepository filmRepository;
+    public Actor getActorById(Short id){
+<span class="nc" id="L25">        return actorRespository.findById(id).orElseThrow(() -&gt; new ResourceAccessException(&quot;No Such Actor&quot;));</span>
+    }
+
+    public Actor createActorService(ActorInput data){
+<span class="nc" id="L29">        final var actor = new Actor();</span>
+<span class="nc" id="L30">        actor.setFirstName(data.getFirstName());</span>
+<span class="nc" id="L31">        actor.setLastName(data.getLastName());</span>
+<span class="nc" id="L32">        List&lt;Short&gt; films = data.getFilms();</span>
+<span class="nc" id="L33">        List&lt;PartialFilm&gt; currentFilms = new ArrayList&lt;PartialFilm&gt;();</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        for(Short filmId : films){</span>
+            //get film to add
+<span class="nc" id="L36">            final var film = filmRepository.findById(filmId).orElseThrow(() -&gt; new ResourceAccessException(&quot;No Such Film&quot;));</span>
+            //add film
+<span class="nc" id="L38">            PartialFilm partialFilm = film.toPartialFilm();</span>
+<span class="nc" id="L39">            currentFilms.add(partialFilm);</span>
+<span class="nc" id="L40">        }</span>
+<span class="nc" id="L41">        actor.setFilms(currentFilms);</span>
+<span class="nc" id="L42">        return actor;</span>
+    }
+
+    public Actor updateActorService(ActorUpdate data){
+<span class="nc" id="L46">        short id = data.getId();</span>
+<span class="nc" id="L47">        final var actor = actorRespository.findById(id).orElseThrow(() -&gt; new ResourceAccessException(&quot;No Such Actor&quot;));</span>
+
+<span class="nc" id="L49">        String firstName = data.getFirstName();</span>
+<span class="nc" id="L50">        String lastName = data.getLastName();</span>
+
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        if(firstName != null)  actor.setFirstName(firstName);</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        if(lastName != null) actor.setLastName(lastName);</span>
+<span class="nc" id="L54">        List&lt;Short&gt; films = data.getFilms();</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        if(!films.isEmpty()) {</span>
+<span class="nc" id="L56">            List&lt;PartialFilm&gt; currentFilms = new ArrayList&lt;PartialFilm&gt;();</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">            for (Short filmId : films) {</span>
+                //get film to add
+<span class="nc" id="L59">                final var film = filmRepository.findById(filmId).orElseThrow(() -&gt; new ResourceAccessException(&quot;No Such Film&quot;));</span>
+                //add film
+<span class="nc" id="L61">                PartialFilm partialFilm = film.toPartialFilm();</span>
+<span class="nc" id="L62">                currentFilms.add(partialFilm);</span>
+<span class="nc" id="L63">            }</span>
+<span class="nc" id="L64">            actor.setFilms(currentFilms);</span>
+        }
+<span class="nc" id="L66">        return actor;</span>
+    }
+
+    public List&lt;PartialFilm&gt; filmsStarredIn(Short id){
+<span class="nc" id="L70">        final var actor = actorRespository.findById(id).orElseThrow(() -&gt; new ResourceAccessException(&quot;No Such Actor&quot;));</span>
+<span class="nc" id="L71">        return actor.getFilms();</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

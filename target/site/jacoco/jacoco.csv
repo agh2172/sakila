@@ -1,0 +1,13 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+sakila,com.example.sakila.controllers,CategoryController,20,0,0,0,3,0,4,0,4,0
+sakila,com.example.sakila.controllers,FilmController,257,0,20,0,51,0,23,0,13,0
+sakila,com.example.sakila.controllers,ActorController,52,16,2,0,9,5,6,3,5,3
+sakila,com.example.sakila.controllers,HelloController,5,0,0,0,2,0,2,0,2,0
+sakila,com.example.sakila.controllers,LanguageController,20,0,0,0,3,0,4,0,4,0
+sakila,com.example.sakila.entities,Film,91,0,0,0,13,0,20,0,20,0
+sakila,com.example.sakila.entities,Language,9,0,0,0,3,0,3,0,3,0
+sakila,com.example.sakila.entities,Actor,40,26,0,0,5,4,8,3,8,3
+sakila,com.example.sakila.entities,PartialActor,36,0,0,0,10,0,8,0,8,0
+sakila,com.example.sakila.entities,Category,9,0,0,0,3,0,3,0,3,0
+sakila,com.example.sakila.entities,PartialFilm,56,30,0,0,10,11,16,2,16,2
+sakila,com.example.sakila.services,ActorService,166,0,10,0,32,0,15,0,10,0
