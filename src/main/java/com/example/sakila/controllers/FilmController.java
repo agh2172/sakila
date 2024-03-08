@@ -46,7 +46,7 @@ public class FilmController {
         film.setReleaseYear(data.getReleaseYear());
         film.setLanguage(data.getLanguage());
         List<Short> actors = data.getActors();
-        List<PartialActor> currentActors = new ArrayList<PartialActor>();
+        List<PartialActor> currentActors = new ArrayList<>();
         for(Short actorId : actors){
             final var actor = actorRespository.findById(actorId).orElseThrow(() -> new ResourceAccessException("No Such Actor"));
             PartialActor partialActor = actor.toPartialActor();
@@ -79,7 +79,7 @@ public class FilmController {
 
         List<Short> actors = data.getActors();
         if(!actors.isEmpty()) {
-            List<PartialActor> currentActors = new ArrayList<PartialActor>();
+            List<PartialActor> currentActors = new ArrayList<>();
             for (Short actorId : actors) {
                 final var actor = actorRespository.findById(actorId).orElseThrow(() -> new ResourceAccessException("No Such Actor"));
                 PartialActor partialActor = actor.toPartialActor();

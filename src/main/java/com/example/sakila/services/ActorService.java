@@ -30,7 +30,7 @@ public class ActorService {
         actor.setFirstName(data.getFirstName());
         actor.setLastName(data.getLastName());
         List<Short> films = data.getFilms();
-        List<PartialFilm> currentFilms = new ArrayList<PartialFilm>();
+        List<PartialFilm> currentFilms = new ArrayList<>();
         for(Short filmId : films){
             //get film to add
             final var film = filmRepository.findById(filmId).orElseThrow(() -> new ResourceAccessException("No Such Film"));
@@ -53,7 +53,7 @@ public class ActorService {
         if(lastName != null) actor.setLastName(lastName);
         List<Short> films = data.getFilms();
         if(!films.isEmpty()) {
-            List<PartialFilm> currentFilms = new ArrayList<PartialFilm>();
+            List<PartialFilm> currentFilms = new ArrayList<>();
             for (Short filmId : films) {
                 //get film to add
                 final var film = filmRepository.findById(filmId).orElseThrow(() -> new ResourceAccessException("No Such Film"));

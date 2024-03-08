@@ -82,7 +82,7 @@ public class ActorController {
     @DeleteMapping("/actors/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void deleteActor(@PathVariable Short id){
-        final var actor = actorRespository.findById(id).orElseThrow(() -> new ResourceAccessException("No Such Actor"));
+        //final var actor = actorRespository.findById(id).orElseThrow(() -> new ResourceAccessException("No Such Actor"));
         actorRespository.deleteById(id);
     }
 
